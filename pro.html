@@ -137,6 +137,11 @@
             border-radius: 10px;
             position: relative;
             border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
         }
         
         .chord-fingers {
@@ -192,23 +197,46 @@
         
         .lyrics-content {
             font-size: 1.1em;
-            line-height: 2;
+            line-height: 1.8;
             color: #2c3e50;
-            white-space: pre-line;
             background: #f8f9fa;
             padding: 25px;
             border-radius: 15px;
             border-left: 4px solid #27ae60;
+            font-family: 'Courier New', monospace;
         }
         
-        .chord-inline {
+        .lyrics-line {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .chord-line {
             color: #e74c3c;
             font-weight: bold;
-            font-size: 1em;
-            background: rgba(231, 76, 60, 0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-right: 5px;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            height: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .lyric-text {
+            color: #2c3e50;
+            font-size: 1.1em;
+            font-family: 'Sarabun', sans-serif;
+        }
+        
+        .verse-break {
+            margin: 25px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.2em;
         }
         
         .scroll-indicator {
@@ -286,68 +314,6 @@
             50% { transform: scale(1.05); }
         }
         
-        .speed-control {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .speed-btn {
-            background: #ecf0f1;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #2c3e50;
-        }
-        
-        .speed-btn:hover {
-            background: #bdc3c7;
-        }
-        
-        .speed-btn.active {
-            background: #3498db;
-            color: white;
-        }
-        
-        .speed-label {
-            font-size: 12px;
-            color: #7f8c8d;
-            font-weight: bold;
-        }
-        
-        .progress-bar {
-            width: 100px;
-            height: 4px;
-            background: #ecf0f1;
-            border-radius: 2px;
-            overflow: hidden;
-            margin: 0 10px;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3498db, #2980b9);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .tempo-info {
-            background: rgba(52, 152, 219, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .tempo-info span {
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -383,16 +349,6 @@
                 font-size: 12px;
             }
             
-            .speed-control {
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 5px;
-            }
-            
-            .progress-bar {
-                width: 80px;
-                margin: 5px;
-            }
             .lyrics-section {
                 max-height: 400px; 
                 overflow-y: auto;
@@ -405,6 +361,7 @@
         <section class="song-header" id="header">
             <h1 class="song-title">ดีเกินไป</h1>
             <p class="song-artist">Smile Buffalo</p>
+            <div class="song-key">Key: C</div>
         </section>
         
         <section class="video-section" id="video">
@@ -421,24 +378,22 @@
                     <div class="chord-name">D</div>
                     <div class="chord-diagram">
                         <img src="D.png">
-                        <!-- <svg width="120" height="140" viewBox="0 0 120 140">
-                            <rect x="20" y="20" width="80" height="100" fill="#f4e4bc" stroke="#8b4513" stroke-width="2"/>
-                            <line x1="20" y1="40" x2="100" y2="40" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="60" x2="100" y2="60" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="80" x2="100" y2="80" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="100" x2="100" y2="100" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="35" y1="20" x2="35" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="50" y1="20" x2="50" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="65" y1="20" x2="65" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="80" y1="20" x2="80" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <circle cx="50" cy="50" r="6" fill="#e74c3c"/>
-                            <circle cx="80" cy="70" r="6" fill="#e74c3c"/>
-                            <circle cx="65" cy="70" r="6" fill="#e74c3c"/>
-                            <text x="50" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">1</text>
-                            <text x="80" y="75" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3</text>
-                            <text x="65" y="75" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2</text>
-                        </svg> -->
-                        
+                    </div>
+                    
+                </div>
+                
+                <div class="chord-card">
+                    <div class="chord-name">A</div>
+                    <div class="chord-diagram">
+                        <img src="A.png">
+                    </div>
+            
+                </div>
+                
+                <div class="chord-card">
+                    <div class="chord-name">Bm</div>
+                    <div class="chord-diagram">
+                        <img src="Bm.png">
                     </div>
                     
                 </div>
@@ -446,119 +401,96 @@
                 <div class="chord-card">
                     <div class="chord-name">G</div>
                     <div class="chord-diagram">
-                        <svg width="120" height="140" viewBox="0 0 120 140">
-                            <rect x="20" y="20" width="80" height="100" fill="#f4e4bc" stroke="#8b4513" stroke-width="2"/>
-                            <line x1="20" y1="40" x2="100" y2="40" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="60" x2="100" y2="60" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="80" x2="100" y2="80" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="100" x2="100" y2="100" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="35" y1="20" x2="35" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="50" y1="20" x2="50" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="65" y1="20" x2="65" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="80" y1="20" x2="80" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <circle cx="65" cy="70" r="6" fill="#e74c3c"/>
-                            <circle cx="35" cy="80" r="6" fill="#e74c3c"/>
-                            <circle cx="50" cy="100" r="6" fill="#e74c3c"/>
-                            <text x="65" y="75" text-anchor="middle" fill="white" font-size="10" font-weight="bold">1</text>
-                            <text x="35" y="85" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2</text>
-                            <text x="50" y="105" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3</text>
-                        </svg>
-                    </div>
-            
-                </div>
-                
-                <div class="chord-card">
-                    <div class="chord-name">Am</div>
-                    <div class="chord-diagram">
-                        <svg width="120" height="140" viewBox="0 0 120 140">
-                            <rect x="20" y="20" width="80" height="100" fill="#f4e4bc" stroke="#8b4513" stroke-width="2"/>
-                            <line x1="20" y1="40" x2="100" y2="40" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="60" x2="100" y2="60" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="80" x2="100" y2="80" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="100" x2="100" y2="100" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="35" y1="20" x2="35" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="50" y1="20" x2="50" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="65" y1="20" x2="65" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="80" y1="20" x2="80" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <circle cx="50" cy="50" r="6" fill="#e74c3c"/>
-                            <circle cx="65" cy="50" r="6" fill="#e74c3c"/>
-                            <circle cx="80" cy="50" r="6" fill="#e74c3c"/>
-                            <text x="50" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">1</text>
-                            <text x="65" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2</text>
-                            <text x="80" y="55" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3</text>
-                        </svg>
+                        <img src="G.png">
                     </div>
                     
                 </div>
-                
                 <div class="chord-card">
-                    <div class="chord-name">F</div>
+                    <div class="chord-name">Em</div>
                     <div class="chord-diagram">
-                        <svg width="120" height="140" viewBox="0 0 120 140">
-                            <rect x="20" y="20" width="80" height="100" fill="#f4e4bc" stroke="#8b4513" stroke-width="2"/>
-                            <line x1="20" y1="40" x2="100" y2="40" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="60" x2="100" y2="60" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="80" x2="100" y2="80" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="20" y1="100" x2="100" y2="100" stroke="#8b4513" stroke-width="1"/>
-                            <line x1="35" y1="20" x2="35" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="50" y1="20" x2="50" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="65" y1="20" x2="65" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="80" y1="20" x2="80" y2="120" stroke="#c0c0c0" stroke-width="1"/>
-                            <line x1="35" y1="48" x2="80" y2="48" stroke="#e74c3c" stroke-width="8" stroke-linecap="round"/>
-                            <circle cx="65" cy="70" r="6" fill="#e74c3c"/>
-                            <circle cx="80" cy="80" r="6" fill="#e74c3c"/>
-                            <text x="57" y="53" text-anchor="middle" fill="white" font-size="10" font-weight="bold">1</text>
-                            <text x="65" y="75" text-anchor="middle" fill="white" font-size="10" font-weight="bold">2</text>
-                            <text x="80" y="85" text-anchor="middle" fill="white" font-size="10" font-weight="bold">3</text>
-                        </svg>
+                        <img src="Em.png">
                     </div>
                     
                 </div>
-            </div>               
-            <!-- <div class="tempo-info">
-                <span>🎼 Tempo:</span> 120 BPM | 
-                <span>🎯 ระดับ:</span> เริ่มต้น-กลาง |
-                <span>⏱️ ความยาว:</span> 4:30
-            </div> -->
+            </div>
         </section>
         
         <section class="lyrics-section" id="lyrics">
             <h2 class="lyrics-title">🎤 คำร้องและคอร์ด</h2>
 
             <div class="lyrics-content">
-                <span class="chord-inline">[C]</span>ก่อนวันนั้น
-                <span class="chord-inline">[G]</span>ที่เธอให้กับฉัน
-                <span class="chord-inline">[Am]</span>ขอบคุณ สำหรับความรัก
-                <span class="chord-inline">[F]</span>ที่มีให้กัน
+                <div class="section-title">Verse 1:</div>
+                <div class="lyrics-line">
+                    <div class="chord-line">C                    G</div>
+                    <div class="lyric-text">ก่อนวันนั้น ที่เธอให้กับฉัน</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">Am                        F</div>
+                    <div class="lyric-text">ขอบคุณ สำหรับความรัก ที่มีให้กัน</div>
+                </div>
+                
+                <div class="lyrics-line">
+                    <div class="chord-line">C                    G</div>
+                    <div class="lyric-text">วันเวลา ที่ผ่านมา เรามีกันและกัน</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">Am                        F</div>
+                    <div class="lyric-text">ขอบคุณ ที่เธอรู้ใจ และอยู่เคียงข้างกัน</div>
+                </div>
 
-                <span class="chord-inline">[C]</span>วันเวลา ที่ผ่านมา
-                <span class="chord-inline">[G]</span>เรามีกันและกัน
-                <span class="chord-inline">[Am]</span>ขอบคุณ ที่เธอรู้ใจ
-                <span class="chord-inline">[F]</span>และอยู่เคียงข้างกัน
+                <div class="verse-break"></div>
+                
+                <div class="section-title">Chorus:</div>
+                <div class="lyrics-line">
+                    <div class="chord-line">C              G</div>
+                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ทำให้ฉันมีความหมาย</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">Am             F</div>
+                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ยังคงอยู่ตรงนี้</div>
+                </div>
+                
+                <div class="lyrics-line">
+                    <div class="chord-line">C                    G</div>
+                    <div class="lyric-text">ไม่ว่าจะเป็นยังไง ฉันจะไม่ทิ้งเธอไป</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">Am                        F</div>
+                    <div class="lyric-text">ขอบคุณ สำหรับทุกสิ่ง ที่มีให้กัน</div>
+                </div>
 
+                <div class="verse-break"></div>
+                
+                <div class="section-title">Bridge:</div>
+                <div class="lyrics-line">
+                    <div class="chord-line">Am                F</div>
+                    <div class="lyric-text">แม้ว่าฟ้าจะมืดมน แม้ว่าฝนจะตก</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">C                        G</div>
+                    <div class="lyric-text">เธอยังคงอยู่ตรงนี้ ไม่เคยทิ้งฉันไป</div>
+                </div>
+                
+                <div class="lyrics-line">
+                    <div class="chord-line">Am                        F</div>
+                    <div class="lyric-text">ขอบคุณ ที่เป็นแสงสว่าง ในวันที่ฉันหลงทาง</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">C                        G</div>
+                    <div class="lyric-text">ขอบคุณ ที่เป็นความหวัง ในวันที่ฉันท้อแท้</div>
+                </div>
 
-                <span class="chord-inline">[C]</span>ขอบคุณ ขอบคุณ
-                <span class="chord-inline">[G]</span>ที่ทำให้ฉันมีความหมาย
-                <span class="chord-inline">[Am]</span>ขอบคุณ ขอบคุณ
-                <span class="chord-inline">[F]</span>ที่ยังคงอยู่ตรงนี้
-
-                <span class="chord-inline">[C]</span>ไม่ว่าจะเป็นยังไง
-                <span class="chord-inline">[G]</span>ฉันจะไม่ทิ้งเธอไป
-                <span class="chord-inline">[Am]</span>ขอบคุณ สำหรับทุกสิ่ง
-                <span class="chord-inline">[F]</span>ที่มีให้กัน
-
-
-                <span class="chord-inline">[Am]</span>แม้ว่าฟ้าจะมืดมน
-                <span class="chord-inline">[F]</span>แม้ว่าฝนจะตก
-                <span class="chord-inline">[C]</span>เธอยังคงอยู่ตรงนี้
-                <span class="chord-inline">[G]</span>ไม่เคยทิ้งฉันไป
-
-                <span class="chord-inline">[Am]</span>ขอบคุณ ที่เป็นแสงสว่าง
-                <span class="chord-inline">[F]</span>ในวันที่ฉันหลงทาง
-                <span class="chord-inline">[C]</span>ขอบคุณ ที่เป็นความหวัง
-                <span class="chord-inline">[G]</span>ในวันที่ฉันท้อแท้
-
-
+                <div class="verse-break"></div>
+                
+                <div class="section-title">Outro:</div>
+                <div class="lyrics-line">
+                    <div class="chord-line">C              G</div>
+                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ทำให้ฉันมีความหมาย</div>
+                </div>
+                <div class="lyrics-line">
+                    <div class="chord-line">Am             F            C</div>
+                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ยังคงอยู่ตรงนี้</div>
+                </div>
             </div>
         </section>
     </div>
@@ -569,6 +501,7 @@
         <div class="scroll-dot" data-target="chords"></div>
         <div class="scroll-dot" data-target="lyrics"></div>
     </div>
+    
     <div class="auto-scroll-controls">
         <button id="toggleScroll" class="auto-scroll-btn">▶ เริ่มเลื่อน</button>
         <button id="speedUp" class="auto-scroll-btn">🔼 เร็วขึ้น</button>
@@ -576,7 +509,6 @@
     </div>
     
     <script>
-        // Smooth scrolling และ scroll indicator
         document.addEventListener('DOMContentLoaded', function() {
             const scrollDots = document.querySelectorAll('.scroll-dot');
             const sections = document.querySelectorAll('section');
@@ -611,7 +543,6 @@
                 });
             }
             
-            // Listen for scroll events
             window.addEventListener('scroll', updateActiveSection);
             
             // Chord card hover effects
@@ -641,7 +572,6 @@
                 });
             }, observerOptions);
             
-            // Apply initial styles and observe sections
             sections.forEach(section => {
                 section.style.opacity = '0';
                 section.style.transform = 'translateY(30px)';
@@ -649,26 +579,24 @@
                 observer.observe(section);
             });
 
-            // Auto-scroll functionality for lyrics
+            // Auto-scroll functionality
             const lyricsContainer = document.getElementById("lyrics");
             const toggleScrollBtn = document.getElementById("toggleScroll");
             const speedUpBtn = document.getElementById("speedUp");
             const speedDownBtn = document.getElementById("speedDown");
 
             let scrollInterval = null;
-            let scrollSpeed = 50; // ยิ่งน้อยยิ่งเร็ว
+            let scrollSpeed = 50;
             let isScrolling = false;
 
             function startScrolling() {
                 if (!scrollInterval) {
                     scrollInterval = setInterval(() => {
-                        // เพิ่มการเลื่อนทีละ 1 pixel
                         lyricsContainer.scrollTop += 1; 
-                        // ตรวจสอบว่าเลื่อนจนสุดแล้วหรือไม่
                         if (lyricsContainer.scrollTop + lyricsContainer.clientHeight >= lyricsContainer.scrollHeight) {
-                            stopScrolling(); // หยุดเมื่อถึงล่างสุด
-                            lyricsContainer.scrollTop = 0; // เลื่อนกลับไปด้านบนเมื่อจบ (ปรับเปลี่ยนได้ตามต้องการ)
-                            setTimeout(startScrolling, 2000); // เริ่มใหม่หลังจาก 2 วินาที (ปรับเปลี่ยนได้)
+                            stopScrolling();
+                            lyricsContainer.scrollTop = 0;
+                            setTimeout(startScrolling, 2000);
                         }
                     }, scrollSpeed);
                     isScrolling = true;
@@ -690,7 +618,7 @@
             });
 
             speedUpBtn.addEventListener("click", () => {
-                scrollSpeed = Math.max(5, scrollSpeed - 10); // เร็วขึ้น (ค่าต่ำสุด 5ms)
+                scrollSpeed = Math.max(5, scrollSpeed - 10);
                 if (isScrolling) {
                     stopScrolling();
                     startScrolling();
@@ -698,7 +626,7 @@
             });
 
             speedDownBtn.addEventListener("click", () => {
-                scrollSpeed = Math.min(200, scrollSpeed + 10); // ช้าลง (ค่าสูงสุด 200ms)
+                scrollSpeed = Math.min(200, scrollSpeed + 10);
                 if (isScrolling) {
                     stopScrolling();
                     startScrolling();
@@ -706,6 +634,5 @@
             });
         });
     </script>
-    
 </body>
 </html>
