@@ -1,519 +1,295 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คอร์ดกีตาร์</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Sarabun', sans-serif;
+            background: linear-gradient(135deg, #d8c3c3 0%, #1c7ceb 100%);
             color: #333;
-            line-height: 1.6;
         }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .song-header {
+        .card-glassy {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
-        .song-title {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .song-artist {
-            font-size: 1.3em;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-        }
-        
-        .song-key {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ffa726);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1.1em;
-            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-        }
-        
-        .video-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        
-        .video-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .chords-gallery {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        
-        .chords-title {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .chord-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .chord-card {
-            background: #fff;
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .chord-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-            border-color: #3498db;
-        }
-        
-        .chord-name {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #e74c3c;
-            margin-bottom: 15px;
-        }
-        
-        .chord-diagram {
-            width: 130px;
-            height: 160px;
-            margin: 0 auto 15px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            position: relative;
-            border: 2px solid #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .chord-fingers {
-            font-size: 0.9em;
-            color: #666;
-            background: #ecf0f1;
-            padding: 8px 12px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-        
-        .chord-progression {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-left: 4px solid #3498db;
-        }
-        
-        .progression-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        
-        .progression-pattern {
-            font-size: 1.1em;
-            color: #555;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .lyrics-section {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-height: 500px; 
-            overflow-y: auto; 
-        }
-        
-        .lyrics-title {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .lyrics-content {
-            font-size: 1.1em;
-            line-height: 1.8;
-            color: #2c3e50;
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 4px solid #27ae60;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .lyrics-line {
-            margin-bottom: 15px;
-            position: relative;
-        }
-        
-        .chord-line {
-            color: #e74c3c;
-            font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
-            height: 20px;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .lyric-text {
-            color: #2c3e50;
-            font-size: 1.1em;
-            font-family: 'Sarabun', sans-serif;
-        }
-        
-        .verse-break {
-            margin: 25px 0;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
-        }
-        
-        .section-title {
-            font-weight: bold;
-            color: #3498db;
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-        
         .scroll-indicator {
             position: fixed;
             top: 50%;
-            right: 20px;
+            right: 1rem; 
             transform: translateY(-50%);
             background: rgba(255, 255, 255, 0.9);
-            padding: 15px 10px;
-            border-radius: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            padding: 1rem 0.625rem; 
+            border-radius: 1.5rem; 
+            box-shadow: 0 0.3rem 1rem rgba(0,0,0,0.2);
             z-index: 100;
         }
-        
         .scroll-dot {
-            width: 12px;
-            height: 12px;
+            width: 0.75rem;
+            height: 0.75rem;
             border-radius: 50%;
-            background: #bdc3c7;
-            margin: 8px 0;
+            background: #9bb9f1;
+            margin: 0.5rem 0;
             transition: all 0.3s ease;
             cursor: pointer;
         }
-        
         .scroll-dot.active {
-            background: #3498db;
+            background: #0835ff;
             transform: scale(1.3);
         }
-        
         .auto-scroll-controls {
             position: fixed;
-            bottom: 20px;
+            bottom: 1.25rem;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            padding: 1.25rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.3);
             z-index: 100;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        
-        .auto-scroll-btn {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
-        }
-        
-        .auto-scroll-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
-        }
-        
         .auto-scroll-btn.active {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
             animation: pulse 2s infinite;
-        }
-        
+        }     
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        
+        .song-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #3d90ee;
+            text-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+        }
+        .song-artist {
+            font-size: 1.3em;
+            color: #000000;
+        }
+        .video-container-responsive {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.9375rem;
+            box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.3);
+        }
+        .video-container-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .chords-title, .lyrics-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #03080e;
+        }
+        .chord-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .chord-card:hover {
+            transform: translateY(-0.3125rem);
+            box-shadow: 0 0.75rem 1.875rem rgba(0,0,0,0.2);
+            border-color: #3498db !important;
+        }
+        .chord-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #0026ff;
+        }
+        .chord-diagram {
+            width: 8.125rem;
+            height: 10rem;
+            margin: 0 auto 0.9375rem;
+            background: #f8f9fa;
+            border-radius: 0.625rem;
+            border: 2px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chord-diagram img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
-            }
-            
-            .song-title {
-                font-size: 2em;
-            }
-            
-            .video-container {
-                height: 250px;
-            }
-            
-            .chord-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 15px;
-            }
-            
             .chord-diagram {
-                width: 100px;
-                height: 120px;
+                width: 6.25rem;
+                height: 7.5rem;
             }
-            
-            .auto-scroll-controls {
-                flex-direction: column;
-                gap: 10px;
-                padding: 15px;
-                bottom: 10px;
+        }
+        .progression-pattern {
+            box-shadow: inset 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
+        }
+        .lyrics-content {
+            font-family: 'Courier New', monospace;
+            max-height: 31.25rem;
+            overflow-y: auto;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .lyrics-content {
+                max-height: 25rem;
             }
-            
-            .auto-scroll-btn {
-                padding: 10px 15px;
-                font-size: 12px;
-            }
-            
-            .lyrics-section {
-                max-height: 400px; 
-                overflow-y: auto;
-            }
+        }
+        .chord-line {
+            color: #0026ff;
+            font-weight: bold;
+            font-size: 1.1em;
+            height: 1.25rem;
+            font-family: 'Courier New', monospace;
+            white-space: pre;
+        }
+        .lyric-text {
+            font-family: 'Sarabun', sans-serif;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <section class="song-header" id="header">
-            <h1 class="song-title">ดีเกินไป</h1>
-            <p class="song-artist">Smile Buffalo</p>
-            <div class="song-key">Key: C</div>
+<body class="pb-4"> <div class="container py-3">
+        <section class="song-header text-center mb-3 p-4 p-md-5 rounded-4 shadow-lg card-glassy" id="header">
+            <h1 class="song-title mb-2">ดีเกินไป</h1>
+            <p class="song-artist fs-5 text-secondary">Smile Buffalo</p>
         </section>
         
-        <section class="video-section" id="video">
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/DDRQRoJM8cI?si=3mpwwj3THzOGiveu" allowfullscreen></iframe>
+        <section class="video-section mb-3 p-4 rounded-4 shadow-lg card-glassy" id="video">
+            <div class="video-container-responsive mx-auto shadow-lg">
+                <iframe src="https://www.youtube.com/embed/DDRQRoJM8cI?si=ec87RV8jWx_lUGf0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </section>
         
-        <section class="chords-gallery" id="chords">
-            <h2 class="chords-title">🎸 คอร์ดที่ใช้</h2>
-            
-            <div class="chord-grid">
-                <div class="chord-card">
-                    <div class="chord-name">D</div>
-                    <div class="chord-diagram">
-                        <img src="D.png">
+        <section class="chords-gallery mb-3 p-4 rounded-4 shadow-lg card-glassy" id="chords">
+            <h2 class="chords-title mb-4">คอร์ดที่ใช้</h2>         
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3 g-md-4">
+                <div class="col">
+                    <div class="card h-100 p-3 text-center border-0 shadow-sm chord-card">
+                        <div class="chord-name mb-3">D</div>
+                        <div class="chord-diagram">
+                            <img src="D.png" alt="D Chord Diagram" class="img-fluid">
+                        </div>
                     </div>
-                    
+                </div>     
+                <div class="col">
+                    <div class="card h-100 p-3 text-center border-0 shadow-sm chord-card">
+                        <div class="chord-name mb-3">A</div>
+                        <div class="chord-diagram">
+                            <img src="A.png" alt="A Chord Diagram" class="img-fluid">
+                        </div>
+                    </div>
+                </div>         
+                <div class="col">
+                    <div class="card h-100 p-3 text-center border-0 shadow-sm chord-card">
+                        <div class="chord-name mb-3">Bm</div>
+                        <div class="chord-diagram">
+                            <img src="Bm.png" alt="Bm Chord Diagram" class="img-fluid">
+                        </div>
+                    </div>
+                </div>      
+                <div class="col">
+                    <div class="card h-100 p-3 text-center border-0 shadow-sm chord-card">
+                        <div class="chord-name mb-3">G</div>
+                        <div class="chord-diagram">
+                            <img src="G.png" alt="G Chord Diagram" class="img-fluid">
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="chord-card">
-                    <div class="chord-name">A</div>
-                    <div class="chord-diagram">
-                        <img src="A.png">
+                <div class="col">
+                    <div class="card h-100 p-3 text-center border-0 shadow-sm chord-card">
+                        <div class="chord-name mb-3">Em</div>
+                        <div class="chord-diagram">
+                            <img src="Em.png" alt="Em Chord Diagram" class="img-fluid">
+                        </div>
                     </div>
-            
                 </div>
-                
-                <div class="chord-card">
-                    <div class="chord-name">Bm</div>
-                    <div class="chord-diagram">
-                        <img src="Bm.png">
-                    </div>
-                    
+            </div>
+        </section>     
+        <section class="lyrics-section mb-3 p-3 rounded-4 shadow-lg card-glassy" id="lyrics">
+            <h2 class="lyrics-title mb-4">คำร้องและคอร์ด</h2>
+            <div class="p-3 rounded-3 bg-light shadow-sm border-start border border-4 lyrics-content">
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">     D   A     Bm    </div>
+                    <div class="lyric-text">ก่อนวันนั้น สองเราผูกพันคล้ายเพื่อน</div>
                 </div>
-                
-                <div class="chord-card">
-                    <div class="chord-name">G</div>
-                    <div class="chord-diagram">
-                        <img src="G.png">
-                    </div>
-                    
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">     D     A       Bm</div>
+                    <div class="lyric-text">เธอเคยเตือน ให้คงดั่งเพื่อนรักไว้</div>
+                </div> 
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line"> D  A  Bm                 </div>
+                    <div class="lyric-text">แต่ในใจ คอยหวังให้เราผูกพันกันมากกว่า</div>
                 </div>
-                <div class="chord-card">
-                    <div class="chord-name">Em</div>
-                    <div class="chord-diagram">
-                        <img src="Em.png">
-                    </div>
-                    
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">Em        A </div>
+                    <div class="lyric-text">เพื่อนดี จึงให้เธอทั้งใจ</div>
+                </div>
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">       D   A     Bm  </div>
+                    <div class="lyric-text">ผิดใช่ไหม ที่ฉันห้ามใจไม่อยู่ </div>
+                </div>
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">       D  A     Bm    </div>
+                    <div class="lyric-text">ก็น่าจะรู้ ที่ทำเพื่อคำว่ารัก</div>
+                </div>            
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">  D   A   Bm          </div>
+                    <div class="lyric-text">แค่คำที่เธอ คอยย้ำคอยห้ามใจฉัน</div>
+                </div>
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line"> Em          A  </div>
+                    <div class="lyric-text">ยิ่งกว่าเชื้อเพลิง ที่คอยเผาใจ</div>
+                </div>            
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">      D  A      </div>
+                    <div class="lyric-text">เลิกพูดได้ไหม ว่าฉันดีเกินไป</div>
+                </div>
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">  Bm    G   A D  </div>
+                    <div class="lyric-text">นั่นหรือเหตุผลที่ ให้ ได้</div>
+                </div>               
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line">   A       Bm G  A</div>
+                    <div class="lyric-text">ไม่รักก็อย่าทำเห็นใจ</div>
+                </div>
+                <div class="lyrics-line mb-3">
+                    <div class="chord-line"> D      A   Bm        G </div>
+                    <div class="lyric-text">ถ้าเลือกจะไป แค่บอกความจริงเท่านั้น</div>
+                </div>
+                <div class="lyrics-line mb-3">
+                    <div class="lyric-text">อย่ามาฆ่ากันด้วยคำว่า ดีเกินไป</div>
                 </div>
             </div>
         </section>
-        
-        <section class="lyrics-section" id="lyrics">
-            <h2 class="lyrics-title">🎤 คำร้องและคอร์ด</h2>
-
-            <div class="lyrics-content">
-                <div class="section-title">Verse 1:</div>
-                <div class="lyrics-line">
-                    <div class="chord-line">C                    G</div>
-                    <div class="lyric-text">ก่อนวันนั้น ที่เธอให้กับฉัน</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">Am                        F</div>
-                    <div class="lyric-text">ขอบคุณ สำหรับความรัก ที่มีให้กัน</div>
-                </div>
-                
-                <div class="lyrics-line">
-                    <div class="chord-line">C                    G</div>
-                    <div class="lyric-text">วันเวลา ที่ผ่านมา เรามีกันและกัน</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">Am                        F</div>
-                    <div class="lyric-text">ขอบคุณ ที่เธอรู้ใจ และอยู่เคียงข้างกัน</div>
-                </div>
-
-                <div class="verse-break"></div>
-                
-                <div class="section-title">Chorus:</div>
-                <div class="lyrics-line">
-                    <div class="chord-line">C              G</div>
-                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ทำให้ฉันมีความหมาย</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">Am             F</div>
-                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ยังคงอยู่ตรงนี้</div>
-                </div>
-                
-                <div class="lyrics-line">
-                    <div class="chord-line">C                    G</div>
-                    <div class="lyric-text">ไม่ว่าจะเป็นยังไง ฉันจะไม่ทิ้งเธอไป</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">Am                        F</div>
-                    <div class="lyric-text">ขอบคุณ สำหรับทุกสิ่ง ที่มีให้กัน</div>
-                </div>
-
-                <div class="verse-break"></div>
-                
-                <div class="section-title">Bridge:</div>
-                <div class="lyrics-line">
-                    <div class="chord-line">Am                F</div>
-                    <div class="lyric-text">แม้ว่าฟ้าจะมืดมน แม้ว่าฝนจะตก</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">C                        G</div>
-                    <div class="lyric-text">เธอยังคงอยู่ตรงนี้ ไม่เคยทิ้งฉันไป</div>
-                </div>
-                
-                <div class="lyrics-line">
-                    <div class="chord-line">Am                        F</div>
-                    <div class="lyric-text">ขอบคุณ ที่เป็นแสงสว่าง ในวันที่ฉันหลงทาง</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">C                        G</div>
-                    <div class="lyric-text">ขอบคุณ ที่เป็นความหวัง ในวันที่ฉันท้อแท้</div>
-                </div>
-
-                <div class="verse-break"></div>
-                
-                <div class="section-title">Outro:</div>
-                <div class="lyrics-line">
-                    <div class="chord-line">C              G</div>
-                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ทำให้ฉันมีความหมาย</div>
-                </div>
-                <div class="lyrics-line">
-                    <div class="chord-line">Am             F            C</div>
-                    <div class="lyric-text">ขอบคุณ ขอบคุณ ที่ยังคงอยู่ตรงนี้</div>
-                </div>
-            </div>
-        </section>
-    </div>
-    
+    </div>   
     <div class="scroll-indicator">
         <div class="scroll-dot active" data-target="header"></div>
         <div class="scroll-dot" data-target="video"></div>
         <div class="scroll-dot" data-target="chords"></div>
         <div class="scroll-dot" data-target="lyrics"></div>
-    </div>
-    
-    <div class="auto-scroll-controls">
-        <button id="toggleScroll" class="auto-scroll-btn">▶ เริ่มเลื่อน</button>
-        <button id="speedUp" class="auto-scroll-btn">🔼 เร็วขึ้น</button>
-        <button id="speedDown" class="auto-scroll-btn">🔽 ช้าลง</button>
-    </div>
-    
+    </div>  
+    <div class="auto-scroll-controls d-flex flex-column flex-md-row align-items-center justify-content-center gap-3">
+        <button id="toggleScroll" class="btn btn-primary auto-scroll-btn py-2 px-3 fw-bold d-flex align-items-center gap-2 rounded-pill shadow-sm">▶ เริ่มเลื่อน</button>
+        <button id="speedUp" class="btn btn-primary auto-scroll-btn py-2 px-3 fw-bold d-flex align-items-center gap-2 rounded-pill shadow-sm">🔼 เร็วขึ้น</button>
+        <button id="speedDown" class="btn btn-primary auto-scroll-btn py-2 px-3 fw-bold d-flex align-items-center gap-2 rounded-pill shadow-sm">🔽 ช้าลง</button>
+    </div>    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const scrollDots = document.querySelectorAll('.scroll-dot');
             const sections = document.querySelectorAll('section');
-            
-            // Click to scroll
             scrollDots.forEach(dot => {
                 dot.addEventListener('click', function() {
                     const targetId = this.dataset.target;
@@ -527,42 +303,35 @@
                     }
                 });
             });
-            
-            // Update active dot on scroll
             function updateActiveSection() {
-                const scrollPosition = window.scrollY + window.innerHeight / 2;
-                
+                const scrollPosition = window.scrollY + window.innerHeight / 2;     
                 sections.forEach((section, index) => {
                     const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
-                    
+                    const sectionBottom = sectionTop + section.offsetHeight;             
                     if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                         scrollDots.forEach(dot => dot.classList.remove('active'));
                         scrollDots[index].classList.add('active');
                     }
                 });
-            }
-            
+            }   
             window.addEventListener('scroll', updateActiveSection);
-            
-            // Chord card hover effects
             const chordCards = document.querySelectorAll('.chord-card');
             chordCards.forEach(card => {
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                });
-                
+                    this.style.transform = 'translateY(-0.3125rem) scale(1.02)';
+                    this.style.boxShadow = '0 0.75rem 1.875rem rgba(0,0,0,0.2)';
+                    this.style.borderColor = '#ff0000';
+                });            
                 card.addEventListener('mouseleave', function() {
                     this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = '0 0.375rem 1.25rem rgba(0,0,0,0.075)';
+                    this.style.borderColor = 'transparent';
                 });
             });
-            
-            // Smooth reveal animation on scroll
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
-            };
-            
+            };     
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -571,24 +340,19 @@
                     }
                 });
             }, observerOptions);
-            
             sections.forEach(section => {
                 section.style.opacity = '0';
-                section.style.transform = 'translateY(30px)';
+                section.style.transform = 'translateY(1.875rem)';
                 section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(section);
             });
-
-            // Auto-scroll functionality
-            const lyricsContainer = document.getElementById("lyrics");
+            const lyricsContainer = document.querySelector("#lyrics .lyrics-content");
             const toggleScrollBtn = document.getElementById("toggleScroll");
             const speedUpBtn = document.getElementById("speedUp");
             const speedDownBtn = document.getElementById("speedDown");
-
             let scrollInterval = null;
             let scrollSpeed = 50;
             let isScrolling = false;
-
             function startScrolling() {
                 if (!scrollInterval) {
                     scrollInterval = setInterval(() => {
@@ -604,27 +368,23 @@
                     toggleScrollBtn.classList.add('active');
                 }
             }
-
             function stopScrolling() {
                 clearInterval(scrollInterval);
                 scrollInterval = null;
                 isScrolling = false;
-                toggleScrollBtn.textContent = "▶ เริ่มเลื่อน";
-                toggleScrollBtn.classList.remove('active');
+                    toggleScrollBtn.textContent = "▶ เริ่มเลื่อน";
+                    toggleScrollBtn.classList.remove('active');
             }
-
             toggleScrollBtn.addEventListener("click", () => {
                 isScrolling ? stopScrolling() : startScrolling();
             });
-
             speedUpBtn.addEventListener("click", () => {
-                scrollSpeed = Math.max(5, scrollSpeed - 10);
+                scrollSpeed = Math.max(2, scrollSpeed - 10);
                 if (isScrolling) {
                     stopScrolling();
                     startScrolling();
                 }
             });
-
             speedDownBtn.addEventListener("click", () => {
                 scrollSpeed = Math.min(200, scrollSpeed + 10);
                 if (isScrolling) {
